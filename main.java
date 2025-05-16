@@ -141,7 +141,6 @@ public class Main {
         int ryadokDlyaVstavky = skaner.nextInt();
         skaner.nextLine();
 
-        // Читаємо всі рядки у масив
         String[] vsiRyadky = new String[1000];
         int kilkistRyadkiv = 0;
 
@@ -166,27 +165,22 @@ public class Main {
             }
         }
 
-        // Перевіряємо коректність номеру рядка
         if (ryadokDlyaVstavky < 1 || ryadokDlyaVstavky > kilkistRyadkiv + 1) {
             System.out.println("Невiрний номер рядка");
             return;
         }
 
-        // Створюємо новий масив з вставленими рядками
         String[] rezultat = new String[kilkistRyadkiv + kilkistNovyhRyadkiv];
         int indeksRezultatu = 0;
 
-        // Копіюємо рядки до місця вставки
         for (int i = 0; i < ryadokDlyaVstavky - 1; i++) {
             rezultat[indeksRezultatu++] = vsiRyadky[i];
         }
 
-        // Додаємо нові рядки з правильними номерами
         for (int i = 0; i < kilkistNovyhRyadkiv; i++) {
             rezultat[indeksRezultatu++] = (ryadokDlyaVstavky + i) + ". " + noviRyadky[i];
         }
 
-        // Оновлюємо номери для решти рядків
         for (int i = ryadokDlyaVstavky - 1; i < kilkistRyadkiv; i++) {
             String staryjRyadok = vsiRyadky[i];
             // Витягуємо текст без номера рядка
@@ -194,7 +188,6 @@ public class Main {
             rezultat[indeksRezultatu++] = (ryadokDlyaVstavky + kilkistNovyhRyadkiv + (i - (ryadokDlyaVstavky - 1))) + ". " + tekst;
         }
 
-        // Записуємо все назад у файл
         try (BufferedWriter fajlovyjPysar = new BufferedWriter(new FileWriter(shlyahFajlu))) {
             for (String ryadok : rezultat) {
                 fajlovyjPysar.write(ryadok + "\n");
